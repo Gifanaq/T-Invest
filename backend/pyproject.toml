@@ -1,0 +1,98 @@
+[tool.poetry]
+name = "backend_t_invest"
+version = "0.1.0"
+description = "Backend for T-Invest project"
+authors = ["Vladislav Kashapov <robotkot.1982@inbox.ru>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "3.13.*"
+pydantic = "^2.14.0"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.8.0"
+mypy = "^1.13.0"
+pytest = "^8.3.0"
+pytest-cov = "^6.0.0"
+pytest-mock = "^3.14.0"
+pytest-deadfixtures = "^2.2.0"
+pytest-repeat = "^0.9.3"
+
+[build-system]
+requires = ["poetry-core>=2.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 88
+indent-width = 4
+target-version = "py313"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "COM812",  # trailing comma
+    "ISC001",  # implicit string concatenation
+    "B008", #FastAPI specifiсity
+    "D",  # no docstring
+
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+    "F401",  # unused import
+]
+
+"tests/**/*.py" = [
+    "ANN001",
+    "ANN201",
+    "ANN202",
+    "PLR2004",
+    "S101",
+    "SLF001",
+    "PT006",
+    "PT011",
+]
+
+"conftest.py" = ["ANN", "S101"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]
+
+[tool.ruff.lint.pylint]
+max-args = 7
+
+
+[tool.mypy]
+python_version = "3.13"
+
+mypy_path = "."
+explicit_package_bases = true
+
+warn_return_any = true
+warn_unused_configs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+strict_equality = true
+no_implicit_optional = true
+check_untyped_defs = true
+
+exclude = [
+    "^tests/",
+    "^conftest\\.py$",
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+pythonpath = ["."]
+
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "-ra",
+]
