@@ -1,10 +1,9 @@
 import { createBrowserRouter } from 'react-router';
 
+import { ROUTES } from '@/config/routes';
 import { MainLayout } from '@/layouts/MainLayout';
 import { HomePage } from '@/pages/HomePage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
-
-import { ROUTES } from './routes';
 
 export const router = createBrowserRouter([
   {

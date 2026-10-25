@@ -2,14 +2,30 @@
 
 React 19 + TypeScript, Vite, React Router. Компонентная архитектура, общий layout.
 
-## Запуск
+## Quick start
+
+Из корня репозитория:
 
 ```
-make frontend-install   # npm ci
-make frontend-run       # dev-сервер на http://localhost:3000
+make frontend-install          # 1. установить зависимости (npm ci)
+cp frontend/.env.example frontend/.env   # 2. создать файл переменных окружения
+make frontend-run              # 3. dev-сервер на http://localhost:3000
 ```
 
-Переменные окружения: скопировать `.env.example` в `.env`.
+Шаг 2 можно пропустить: без `.env` фронтенд обращается к бэкенду на `http://localhost:8000`
+(см. `src/config/env.ts`).
+
+Остальные команды — `make help`.
+
+### Windows
+
+Чтобы git не подменял окончания строк на CRLF (иначе `make frontend-fmt` меняет все файлы):
+
+```
+git config --global core.autocrlf false
+```
+
+В репозитории окончания строк зафиксированы в `.gitattributes` (LF) и `.prettierrc.json`.
 
 ## Структура `src/`
 
@@ -17,7 +33,7 @@ make frontend-run       # dev-сервер на http://localhost:3000
 app/            точка сборки приложения
   App.tsx       корневой компонент
   providers/    глобальные провайдеры (тема, auth, query client)
-  router/       маршруты (routes.ts) и конфиг роутера (router.tsx)
+  router/       конфиг роутера (router.tsx)
 layouts/        каркасы страниц; MainLayout = Header + <Outlet /> + Footer
 pages/          страницы, по одной папке на маршрут
 components/
@@ -25,7 +41,7 @@ components/
   common/       составные компоненты приложения (Header, Footer...)
 hooks/          общие хуки
 services/api/   HTTP-клиент и запросы к бэкенду
-config/         конфигурация (env)
+config/         конфигурация: env, пути маршрутов (routes.ts)
 types/          общие типы
 utils/          вспомогательные функции
 styles/         глобальные стили и CSS-переменные
@@ -37,17 +53,9 @@ styles/         глобальные стили и CSS-переменные
   `Component.test.tsx`, `index.ts` (реэкспорт).
 - Импорт из других слоёв через алиас `@/` и `index.ts` папки:
   `import { Button } from '@/components/ui/Button'`.
-- Зависимости идут сверху вниз: `app → layouts → pages → components → hooks/services → utils/types`.
-  `ui`-компоненты не импортируют `common`, `pages` и `services`.
+- Зависимости идут сверху вниз:
+  `app → layouts → pages → components → hooks/services → config/utils/types`.
+  Нижний слой не импортирует верхний: например, компоненты и страницы берут пути из
+  `@/config/routes`, а не из `app/router`. `ui`-компоненты не импортируют `common`, `pages` и `services`.
 - Стили — CSS Modules, цвета и отступы только через переменные из `styles/variables.css`.
-- Новая страница: папка в `pages/`, путь в `app/router/routes.ts`, маршрут в `app/router/router.tsx`.
-
-## Команды
-
-| make                 | npm                 |                   |
-| -------------------- | ------------------- | ----------------- |
-| `frontend-test`      | `npm test`          | тесты (Vitest)    |
-| `frontend-lint`      | `npm run lint`      | ESLint            |
-| `frontend-fmt`       | `npm run fmt`       | Prettier          |
-| `frontend-typecheck` | `npm run typecheck` | проверка типов    |
-| `frontend-build`     | `npm run build`     | production-сборка |
+- Новая страница: папка в `pages/`, путь в `config/routes.ts`, маршрут в `app/router/router.tsx`.

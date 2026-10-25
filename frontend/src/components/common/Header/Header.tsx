@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-import { ROUTES } from '@/app/router/routes';
+import { ROUTES } from '@/config/routes';
 
 import styles from './Header.module.css';
 
