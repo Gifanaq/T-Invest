@@ -1,0 +1,17 @@
+:root {
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-text: #1a1d21;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-primary: #ffdd2d;
+  --color-on-primary: #1a1d21;
+
+  --space-2: 0.5rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+
+  --radius-md: 8px;
+  --header-height: 64px;
+  --content-max-width: 1200px;
+}
