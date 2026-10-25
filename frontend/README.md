@@ -6,10 +6,15 @@ React 19 + TypeScript, Vite, React Router. Компонентная архите
 
 Из корня репозитория:
 
-```
-make frontend-install          # 1. установить зависимости (npm ci)
-cp frontend/.env.example frontend/.env   # 2. создать файл переменных окружения
-make frontend-run              # 3. dev-сервер на http://localhost:3000
+```bash
+# 1. Установить зависимости
+make frontend-install
+
+# 2. Создать файл переменных окружения
+cp frontend/.env.example frontend/.env
+
+# 3. Запустить dev-сервер на http://localhost:3000
+make frontend-run
 ```
 
 Шаг 2 можно пропустить: без `.env` фронтенд обращается к бэкенду на `http://localhost:8000`
@@ -21,7 +26,7 @@ make frontend-run              # 3. dev-сервер на http://localhost:3000
 
 Чтобы git не подменял окончания строк на CRLF (иначе `make frontend-fmt` меняет все файлы):
 
-```
+```bash
 git config --global core.autocrlf false
 ```
 
@@ -29,7 +34,7 @@ git config --global core.autocrlf false
 
 ## Структура `src/`
 
-```
+```text
 app/            точка сборки приложения
   App.tsx       корневой компонент
   providers/    глобальные провайдеры (тема, auth, query client)
