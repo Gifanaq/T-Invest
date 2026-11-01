@@ -13,12 +13,12 @@ jobs:
         working-directory: backend
     steps:
       - uses: actions/checkout@v5
+      - run: pipx install poetry
       - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
           cache: poetry
           cache-dependency-path: backend/poetry.lock
-      - run: pipx install poetry
       - run: poetry install
       - run: poetry run ruff check .
       - run: poetry run ruff format --check .
