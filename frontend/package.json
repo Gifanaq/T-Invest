@@ -15,6 +15,7 @@
     "test:watch": "vitest",
     "lint": "eslint .",
     "fmt": "prettier --write .",
+    "fmt:check": "prettier --check .",
     "typecheck": "tsc -b --noEmit"
   },
   "dependencies": {

@@ -1,5 +1,5 @@
 .PHONY: help \
-        backend-install backend-run backend-test backend-lint backend-fmt backend-mypy \
+        backend-install backend-run backend-test backend-lint backend-fmt backend-mypy backend-lint-fix \
         frontend-install frontend-build frontend-run frontend-test frontend-lint frontend-fmt frontend-typecheck
 
 help:
@@ -31,6 +31,9 @@ backend-test:
 
 backend-lint:
 	cd backend && poetry run ruff check .
+
+backend-lint-fix:
+	cd backend && poetry run ruff check --fix .
 
 backend-fmt:
 	cd backend && poetry run ruff format .
